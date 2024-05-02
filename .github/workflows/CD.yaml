@@ -3,7 +3,7 @@ name: UNIT TEST
 on: 
   push:
     branches: 
-      - code-rules-codely    
+      - main    
 
 jobs:
   build-test:
