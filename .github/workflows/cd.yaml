@@ -26,7 +26,7 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install -y freerdp2-x11
       - run: echo "Connect to virtual server"
-      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}
+      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
       - name: Copy code to Windows Server
         run: |
           sudo apt-get install -y sshpass
