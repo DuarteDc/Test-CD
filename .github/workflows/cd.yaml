@@ -16,7 +16,7 @@ jobs:
       - run: sudo apt-get install -y openfortivpn
 
       - name: Connect to VPN
-        run: sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }}
+        run: sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }} > /dev/null 2>&1 &
 
   deploy:
     runs-on: ubuntu-latest
