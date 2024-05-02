@@ -15,7 +15,7 @@ jobs:
       - uses: php-actions/composer@v6
       # - run: echo "Composer dependencies have been installed"
       # - run: vendor/bin/phpunit ./test
-      - run: install VPV
+      - echo: Install Openfortivpn
       - run: sudo apt-get install -y openfortivpn
 
       - name: Connect to VPN
