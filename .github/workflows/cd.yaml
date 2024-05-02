@@ -16,7 +16,8 @@ jobs:
       - run: echo "Install Openfortivpn"
       - run: sudo apt-get install -y openfortivpn
       - run: echo "Install XFREERDP"
-      - run:  sudo apt-get install -y freerdp2-x11 freerdp2-shadow-x11
+      - run: sudo apt update
+      - run: sudo apt install -y freerdp2-x11
 
       - name: Connect to VPN
         run: |
