@@ -14,7 +14,9 @@ jobs:
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - uses: php-actions/composer@v6
       - run: echo "Install Openfortivpn"
-      - run: sudo apt-get install -y openfortivpn freerdp2-x11
+      - run: sudo apt-get install -y openfortivpn
+      - run: echo "Install XFREERDP"
+      - run: sudo apt install -y freerdp2-x11
 
       - name: Connect to VPN
         run: |
