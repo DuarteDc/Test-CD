@@ -18,4 +18,4 @@ jobs:
 
       - name: Connect to VPN
         run: |
-          sudo openfortivpn --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }} --host=${{ secrets.VPN_HOST }} --port=${{ secrets.VPN_PORT }}
+          sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }}
