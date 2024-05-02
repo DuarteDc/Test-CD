@@ -1,9 +1,9 @@
 name: UNIT TEST
 
-on: 
+on:
   push:
-    branches: 
-      - main    
+    branches:
+      - main
 
 jobs:
   build-test:
@@ -22,15 +22,24 @@ jobs:
       - name: Connect to VPN
         run: |
           sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }}
+           # Espera un tiempo para que la conexión VPN se establezca
+           sleep 10
+
+          # Verifica si la conexión VPN está activa
+          if sudo netstat -tnl | grep -q "127.0.0.1:1080"; then
+            echo "VPN connected."
+          else
+            echo "Error: VPN connection failed."
+            exit 1  # Salir del flujo de trabajo con un código de error
+          fi
 
       - run: echo "Connect to virtual server"
-      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}} /f /z
-  
+      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
+
       - name: Copy code to Windows Server
         run: |
           sudo apt-get install -y sshpass
           sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -r ./path/to/files ${secrets.HOST_USER}@localhost:/c/Users/${{ secrets.HOST_USER }}/Desktop
-
 
       - name: Disconnect from VPN
         run: |
