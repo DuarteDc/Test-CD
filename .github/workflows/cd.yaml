@@ -14,8 +14,23 @@ jobs:
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - uses: php-actions/composer@v6
       - run: echo "Install Openfortivpn"
-      - run: sudo apt-get install -y openfortivpn
+      - run: sudo apt-get install -y openfortivpn xfreerdp
 
       - name: Connect to VPN
         run: |
           sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }}
+
+      - run: echo "Connect to virtual server"
+      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
+  
+      - name: Copy code to Windows Server
+        run: |
+          sudo apt-get install -y sshpass
+          sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -r ./path/to/files ${secrets.HOST_USER}@localhost:/c/Users/${{ secrets.HOST_USER }}/Desktop
+
+          
+      - name: Disconnect from VPN
+        run: |
+          # Agrega aquí los comandos para desconectar de la VPN
+          # Por ejemplo, puedes utilizar el comando killall para detener el proceso de OpenFortiVPN
+          sudo killall openfortivpn
