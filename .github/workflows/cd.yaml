@@ -28,7 +28,7 @@ jobs:
       # - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
       - name: Copy code to Windows Server
         run: |
-          sudo apt update
+          sudo apt-get update
           sudo apt-get install -y sshpass
           shpass -p "${{ secrets.HOST_PASSWORD }}" scp -r ./path/to/files "${{ secrets.HOST_USER }}"@localhost:/c/Users/"${{ secrets.HOST_USER }}"/Desktop
       - name: Disconnect from VPN
