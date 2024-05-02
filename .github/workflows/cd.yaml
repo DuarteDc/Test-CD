@@ -31,6 +31,6 @@ jobs:
           sudo apt update
           sudo apt-get install -y sshpass
           pwd
-          sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -r ./Test-CD ${secrets.HOST_USER}@localhost:/c/Users/${{ secrets.HOST_USER }}/Desktop
+          sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -r ./${secrets.HOST_USER}@localhost:/c/Users/${{ secrets.HOST }}/Desktop
       - name: Disconnect from VPN
         run: sudo killall openfortivpn
