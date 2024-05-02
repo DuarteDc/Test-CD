@@ -20,5 +20,4 @@ jobs:
 
       - name: Connect to VPN
         run: |
-          # Conéctate al servidor a través de OpenFortiVPN
-          sudo openfortivpn --username=<TU_USUARIO> --password=<TU_CONTRASEÑA> --trusted-cert=<CERTIFICADO> --host=<DIRECCIÓN_SERVIDOR> --port=<PUERTO> --no-routes
+          sudo openfortivpn --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }} --host=${{ secrets.VPN_HOST }} --port=${{ secrets.VPN_PORT }}
