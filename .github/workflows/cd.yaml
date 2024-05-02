@@ -15,9 +15,6 @@ jobs:
       - uses: php-actions/composer@v6
       # - run: echo "Composer dependencies have been installed"
       # - run: vendor/bin/phpunit ./test
-
-  deployment:
-    steps:
       - run: install VPV
       - run: sudo apt-get install -y openfortivpn
 
@@ -25,4 +22,3 @@ jobs:
         run: |
           # Conéctate al servidor a través de OpenFortiVPN
           sudo openfortivpn --username=<TU_USUARIO> --password=<TU_CONTRASEÑA> --trusted-cert=<CERTIFICADO> --host=<DIRECCIÓN_SERVIDOR> --port=<PUERTO> --no-routes
-
