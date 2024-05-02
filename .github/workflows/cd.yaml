@@ -24,7 +24,7 @@ jobs:
           sudo openfortivpn ${{ secrets.VPN_HOST }}:${{ secrets.VPN_PORT }} --username=${{ secrets.VPN_USERNAME }} --password=${{ secrets.VPN_PASSWORD }} --trusted-cert=${{ secrets.VPN_CERT }}
 
       - run: echo "Connect to virtual server"
-      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
+      - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}} /f /z
   
       - name: Copy code to Windows Server
         run: |
