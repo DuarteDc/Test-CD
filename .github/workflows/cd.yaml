@@ -27,10 +27,21 @@ jobs:
       # - run: echo "Connect to virtual server"
       # - run: xfreerdp /u:${{ secrets.HOST_USER }} /p:${{ secrets.HOST_PASSWORD }} /v:${{ secrets.HOST}}
 
-      - name: Copy code to Windows Server
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-          sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -o StrictHostKeyChecking=no -r ./ "@${{ secrets.HOST }}":/c/Users/"${{ secrets.HOST_USER }}"/Desktop
-      - name: Disconnect from VPN
-        run: sudo killall openfortivpn
+      # - name: Copy code to Windows Server
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y sshpass
+      #     sshpass -p "${{ secrets.HOST_PASSWORD }}" scp -o StrictHostKeyChecking=no -r ./ "@  ${{ secrets.HOST }}":/c/Users/"${{ secrets.HOST_USER }}"/Desktop
+      # - name: Disconnect from VPN
+      #   run: sudo killall openfortivpn
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy files to desktop
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "."
+          target: "C:\\Users\\IGECEM\\Desktop" 
